@@ -12,6 +12,7 @@
 * The equipment model availability numbers no longer overflow when they are two digits long ([#1363](https://github.com/YaleSTC/reservations/issues/1363)).
 * Admins can again manually create new users when CAS authentication is enabled ([#1370](https://github.com/YaleSTC/reservations/issues/1370)).
 * Fixed missing affiliation LDAP lookup ([#1375](https://github.com/YaleSTC/reservations/issues/1375)).
+* Fixed broken cancel button on the quick new user model ([#1376](https://github.com/YaleSTC/reservations/issues/1376)).
 * Fixed issue with missing datepicker assets / update jQuery UI + Bootstrap theme ([#1377](https://github.com/YaleSTC/reservations/issues/1377)).
 * Fixed broken link to pending reservations on equipment model page ([#1379](https://github.com/YaleSTC/reservations/issues/1379)).
 * Fixed broken "Total Stock" count on the equipment model table ([#1380](https://github.com/YaleSTC/reservations/issues/1380)).
