@@ -4,7 +4,7 @@
 
 ## v6.0.0 - 2016-02-01
 ### Important
-*This release includes an upgrade to Ruby 2.2.3 and Rails 4.2.5 along with updates to many other dependencies.*
+*This release includes an upgrade to Ruby 2.2.3 and Rails 4.2.5 along with updates to many other dependencies. Also, the configuration parameter SERVE_STATIC was renamed to RAILS_SERVE_STATIC_FILES.*
 
 ### Fixed
 * Fixed the alignment of the reset TOS checkbox on the Settings page ([#1266](https://github.com/YaleSTC/reservations/issues/1266)).
@@ -19,6 +19,7 @@
 * Fixed migration that was leading to reservations being incorrectly marked as overdue ([#1381](https://github.com/YaleSTC/reservations/issues/1381)).
 * Removed extra padding from navbar due to #1377 ([#1403](https://github.com/YaleSTC/reservations/issues/1403)).
 * Resolved an issue where all AdminMailer e-mails were not being delivered ([#1426](https://github.com/YaleSTC/reservations/issues/1426)).
+* Fixed typo in .env.example ([#1427](https://github.com/YaleSTC/reservations/issues/1427)).
 * Resolved an issue where late fees in e-mails were cumulative, not daily ([#1433](https://github.com/YaleSTC/reservations/issues/1433)).
 
 ### Changed
@@ -27,6 +28,7 @@
 * Refactored and improved the md_link method for resources and standardized its usage in notes / logs ([#1382](https://github.com/YaleSTC/reservations/issues/1382)).
 * Improved ability.rb for clarity and to avoid redundancy ([#1391](https://github.com/YaleSTC/reservations/issues/1391)).
 * Reordered sections on current reservations page ([#1414](https://github.com/YaleSTC/reservations/issues/1414)).
+* Updated SERVE_STATIC to RAILS_SERVE_STATIC_FILES in .env.example and app.json ([#1419](https://github.com/YaleSTC/reservations/issues/1419)).
 
 ### Added
 * Made archived reservations accessible through the reservations index page ([#1383](https://github.com/YaleSTC/reservations/issues/1383)).
