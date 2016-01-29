@@ -21,6 +21,7 @@
 * Resolved an issue where all AdminMailer e-mails were not being delivered ([#1426](https://github.com/YaleSTC/reservations/issues/1426)).
 * Fixed typo in .env.example ([#1427](https://github.com/YaleSTC/reservations/issues/1427)).
 * Resolved an issue where late fees in e-mails were cumulative, not daily ([#1433](https://github.com/YaleSTC/reservations/issues/1433)).
+* Uploaded CSVs support extra columns ([#1446](https://github.com/YaleSTC/reservations/issues/1446)).
 
 ### Changed
 * Refactored and improved Reservation queries using Query Objects ([#1288](https://github.com/YaleSTC/reservations/issues/1288)).
