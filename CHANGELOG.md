@@ -14,6 +14,7 @@
 * Fixed missing affiliation LDAP lookup ([#1375](https://github.com/YaleSTC/reservations/issues/1375)).
 * Fixed broken cancel button on the quick new user model ([#1376](https://github.com/YaleSTC/reservations/issues/1376)).
 * Fixed issue with missing datepicker assets / update jQuery UI + Bootstrap theme ([#1377](https://github.com/YaleSTC/reservations/issues/1377)).
+* The reservation history tables on user profiles are again sortable ([#1378](https://github.com/YaleSTC/reservations/issues/1378)).
 * Fixed broken link to pending reservations on equipment model page ([#1379](https://github.com/YaleSTC/reservations/issues/1379)).
 * Fixed broken "Total Stock" count on the equipment model table ([#1380](https://github.com/YaleSTC/reservations/issues/1380)).
 * Fixed migration that was leading to reservations being incorrectly marked as overdue ([#1381](https://github.com/YaleSTC/reservations/issues/1381)).
