@@ -18,6 +18,7 @@
 * Fixed broken "Total Stock" count on the equipment model table ([#1380](https://github.com/YaleSTC/reservations/issues/1380)).
 * Fixed migration that was leading to reservations being incorrectly marked as overdue ([#1381](https://github.com/YaleSTC/reservations/issues/1381)).
 * Removed extra padding from navbar due to #1377 ([#1403](https://github.com/YaleSTC/reservations/issues/1403)).
+* All URL helpers now use the correct relative root with subdirectory deployment ([#1424](https://github.com/YaleSTC/reservations/issues/1424)).
 * Resolved an issue where all AdminMailer e-mails were not being delivered ([#1426](https://github.com/YaleSTC/reservations/issues/1426)).
 * Fixed typo in .env.example ([#1427](https://github.com/YaleSTC/reservations/issues/1427)).
 * Resolved an issue where late fees in e-mails were cumulative, not daily ([#1433](https://github.com/YaleSTC/reservations/issues/1433)).
