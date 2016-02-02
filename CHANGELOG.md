@@ -26,6 +26,7 @@
 * Resolved an issue where late fees in e-mails were cumulative, not daily ([#1433](https://github.com/YaleSTC/reservations/issues/1433)).
 * Uploaded CSVs support extra columns ([#1446](https://github.com/YaleSTC/reservations/issues/1446)).
 
+
 ### Changed
 * Refactored and improved Reservation queries using Query Objects ([#1288](https://github.com/YaleSTC/reservations/issues/1288)).
 * Updated all dependencies, including Ruby and Rails ([#1329](https://github.com/YaleSTC/reservations/issues/1329)).
@@ -33,6 +34,7 @@
 * Improved ability.rb for clarity and to avoid redundancy ([#1391](https://github.com/YaleSTC/reservations/issues/1391)).
 * Reordered sections on current reservations page ([#1414](https://github.com/YaleSTC/reservations/issues/1414)).
 * Updated SERVE_STATIC to RAILS_SERVE_STATIC_FILES in .env.example and app.json ([#1419](https://github.com/YaleSTC/reservations/issues/1419)).
+* Changed receipts page to include user search ([#1420](https://github.com/YaleSTC/reservations/issues/1420)).
 
 ### Added
 * Made archived reservations accessible through the reservations index page ([#1383](https://github.com/YaleSTC/reservations/issues/1383)).
