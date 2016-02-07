@@ -26,6 +26,7 @@
 * Fixed typo in .env.example ([#1427](https://github.com/YaleSTC/reservations/issues/1427)).
 * Resolved an issue where late fees in e-mails were cumulative, not daily ([#1433](https://github.com/YaleSTC/reservations/issues/1433)).
 * Uploaded CSVs support extra columns ([#1439](https://github.com/YaleSTC/reservations/issues/1439)).
+* CSV Import can handle CR line endings ([#1438](https://github.com/YaleSTC/reservations/issues/1438)).
 
 ### Changed
 * Refactored and improved Reservation queries using Query Objects ([#1288](https://github.com/YaleSTC/reservations/issues/1288)).
