@@ -362,6 +362,7 @@ class Reservation < ActiveRecord::Base
     assign_attributes(new_params)
     changes = self.changes
     new_notes = '' unless new_notes
+    binding.pry
     if new_notes.empty? && changes.empty?
       return self
     else
@@ -395,6 +396,10 @@ class Reservation < ActiveRecord::Base
             name = 'Item'
             old_val = diff[0] ? EquipmentItem.find(diff[0]).md_link : 'nil'
             new_val = diff[1] ? EquipmentItem.find(diff[1]).md_link : 'nil'
+          when 'checked_out'
+            name = 'Checked Out Time'
+            old_val = diff[0].to_s(:long)
+            new_val = diff[1].to_s(:long)
           end
           self.notes += "\n#{name} changed from " + old_val + ' to '\
             + new_val + '.'
