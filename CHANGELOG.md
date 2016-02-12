@@ -28,7 +28,7 @@
 * Uploaded CSVs support extra columns ([#1439](https://github.com/YaleSTC/reservations/issues/1439)).
 * CSV Import can handle CR line endings ([#1438](https://github.com/YaleSTC/reservations/issues/1438)).
 * Resolved an issue where checked-out reservations were not being taken into account when validating availability ([#1449](https://github.com/YaleSTC/reservations/issues/1449)).
-* * The start and end dates of reports can now actually be changed ([#1476](https://github.com/YaleSTC/reservations/issues/1476)).
+* The start and end dates of reports can now actually be changed ([#1476](https://github.com/YaleSTC/reservations/issues/1476)).
 * The reservation overdue parameter correctly updates when editing the due date of checked out reservations ([#1479](https://github.com/YaleSTC/reservations/issues/1479)).
 * Fixed an issue where enabling CAS wouldn't actually require the relevant gem ([#1487](https://github.com/YaleSTC/reservations/issues/1487)).
 
