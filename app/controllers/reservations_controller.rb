@@ -195,7 +195,6 @@ class ReservationsController < ApplicationController
   def update # rubocop:disable all
     message = 'Successfully edited reservation.'
     res = reservation_params
-    binding.pry
     # add new equipment item id to hash if it's being changed and save old
     # and new items for later
     unless params[:equipment_item].blank?

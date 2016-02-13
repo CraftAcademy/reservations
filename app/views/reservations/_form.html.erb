@@ -27,7 +27,7 @@
   <div class="form-group">
     <%= f.label :checked_out, 'Check-out date and time', class: 'col-sm-2 control-label' %>
     <div class="col-sm-7">
-      <%= f.text_field :checked_out, class: 'date_checkout form-control', placeholder: @reservation.checked_out.strftime('%m/%d/%Y %l:%M %p') %>
+      <%= f.text_field :checked_out, class: 'date_checkout form-control', value: @reservation.checked_out.strftime('%m/%d/%Y %l:%M %p') %>
       <%= f.input :checked_out, as: :hidden, input_html: { id: "date_checkout_alt" } %>
     </div>
   </div>

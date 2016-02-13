@@ -362,7 +362,6 @@ class Reservation < ActiveRecord::Base
     assign_attributes(new_params)
     changes = self.changes
     new_notes = '' unless new_notes
-    binding.pry
     if new_notes.empty? && changes.empty?
       return self
     else

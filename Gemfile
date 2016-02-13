@@ -35,6 +35,7 @@ gem 'nilify_blanks', '~> 1.2.1'
 # ui
 gem 'jquery-rails', '~> 4.0.5'
 gem 'jquery-ui-rails', '~> 5.0.5'
+gem 'jquery-timepicker-addon-rails'
 gem 'rails4-autocomplete', '~> 1.1.1'
 gem 'select2-rails', '~> 4.0.1'
 gem 'kaminari', '~> 0.16.3'
