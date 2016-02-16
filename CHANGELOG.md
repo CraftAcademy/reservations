@@ -45,8 +45,8 @@
 * Reservations now defaults to deleting missed reservations after one week ([#1491](https://github.com/YaleSTC/reservations/issues/1491)).
 
 ### Added
-* Made archived reservations accessible through the reservations index page ([#1383](https://github.com/YaleSTC/reservations/issues/1383)).
 * CSV files of user and equipment data can be downloaded ([#1337](https://github.com/YaleSTC/reservations/issues/1337)).
+* Made archived reservations accessible through the reservations index page ([#1383](https://github.com/YaleSTC/reservations/issues/1383)).
 
 
 ## v5.5.1 - 2016-01-12
