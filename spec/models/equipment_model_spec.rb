@@ -320,7 +320,7 @@ describe EquipmentModel, type: :model do
           expect(@model.number_overdue).to eq(1)
         end
       end
-      describe '.available_count' do
+      describe '.num_available_on' do
         it 'should take the total # of the model, subtract the number '\
           'reserved, checked-out, and overdue for the given date and return '\
           'the result' do
@@ -334,7 +334,7 @@ describe EquipmentModel, type: :model do
           @overdue.save(validate: false)
           @model.reload
           expect(@model.equipment_items_count).to eq(4)
-          expect(@model.available_count(Time.zone.today)).to eq(1)
+          expect(@model.num_available_on(Time.zone.today)).to eq(1)
         end
       end
       describe '.available_item_select_options' do

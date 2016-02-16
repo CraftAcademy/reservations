@@ -257,7 +257,7 @@ class Reservation < ActiveRecord::Base
     # check some basic conditions
     return false if !checked_out? || overdue? || reserver.role == 'banned'
     return false unless equipment_model.maximum_renewal_length > 0
-    return false unless equipment_model.available_count(due_date + 1.day) > 0
+    return false unless equipment_model.num_available_on(due_date + 1.day) > 0
 
     self.times_renewed ||= 0
 

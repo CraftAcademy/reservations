@@ -177,31 +177,36 @@ class EquipmentModel < ActiveRecord::Base
     max_reserved
   end
 
-  def num_available_from_source(start_date, due_date, source_reservations)
+  def num_available(start_date, due_date, source = nil)
     # get the number available in the given date range
-    # take an array of reservations instead of using a database call
-    # for database query optimization purposes
-    # 2 queries to calculate max_num
-    max_num = equipment_items.active.count - number_overdue
-    available = max_num - num_reserved(start_date, due_date,
-                                       source_reservations)
-    available < 0 ? 0 : available
+    # 2 queries if source given; 3 otherwise
+    #
+    # source is an array of reservations that can replace a database call
+    #   for database query optimization purposes
+    # otherwise, 1 query to get relevant reservations
+    unless source
+      source = Reservation.for_eq_model(id).active
+               .overlaps_with_date_range(start_date, due_date)
+    end
+    equipment_items.active.count - number_overdue -
+      num_reserved(start_date, due_date, source)
   end
 
-  def num_available(start_date, due_date)
-    # for if you just want the number available, 1 query to get
-    # relevant reservations
-    relevant_reservations = Reservation.for_eq_model(id).active
-                            .overlaps_with_date_range(start_date, due_date)
-                            .all
-    num_available_from_source(start_date, due_date, relevant_reservations)
+  def num_available_on(date)
+    # get the total number of items of this kind then subtract the total
+    # quantity currently reserved, checked-out, and overdue
+    reserved = Reservation.reserved_on_date(date).for_eq_model(id).count
+    equipment_items.active.count - reserved - number_overdue
   end
 
-  # Returns true if the reserver is ineligible to checkout the model.
-  def model_restricted?(reserver_id)
-    return false if reserver_id.nil?
-    reserver = User.find(reserver_id)
-    !(requirements - reserver.requirements).empty?
+  # figure out the qualitative status of this model's items
+  def availability(date)
+    num = num_available_on(date)
+    total = equipment_items.active.count
+    if num == 0 then 'none'
+    elsif num == total then 'all'
+    else 'some'
+    end
   end
 
   # Returns the number of overdue objects for a given model,
@@ -210,22 +215,11 @@ class EquipmentModel < ActiveRecord::Base
     Reservation.overdue.for_eq_model(id).size
   end
 
-  def available_count(date)
-    # get the total number of items of this kind then subtract the total
-    # quantity currently reserved, checked-out, and overdue
-    total = equipment_items.active.count
-    reserved = Reservation.reserved_on_date(date).for_eq_model(id).count
-    total - reserved - number_overdue
-  end
-
-  # figure out the qualitative status of this model's items
-  def availability(date)
-    num = available_count(date)
-    total = equipment_items.active.count
-    if num == 0 then 'none'
-    elsif num == total then 'all'
-    else 'some'
-    end
+  # Returns true if the reserver is ineligible to checkout the model.
+  def model_restricted?(reserver_id)
+    return false if reserver_id.nil?
+    reserver = User.find(reserver_id)
+    !(requirements - reserver.requirements).empty?
   end
 
   def available_item_select_options
