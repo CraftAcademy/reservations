@@ -286,25 +286,50 @@ describe EquipmentModel, type: :model do
 
     context 'methods involving reservations' do
       # @model and @category are already set.
+      ACTIVE = [:valid_reservation, :checked_out_reservation]
+      INACTIVE = [:checked_in_reservation, :overdue_returned_reservation,
+                 :missed_reservation, :request]
       describe '.num_available' do
-        it 'should return the number of items of that model available '\
-          'over a given date range' do
-          @reservation =
-            FactoryGirl.create(:valid_reservation, equipment_model: @model)
-          @extra_item =
-            FactoryGirl.create(:equipment_item, equipment_model: @model)
-          @model.reload
-          expect(@model.equipment_items_count).to eq(2)
-          expect(
-            @model.num_available(@reservation.start_date,
-                                 @reservation.due_date)
-          ).to eq(1)
+        shared_examples 'with overlap' do |start_offset, due_offset| 
+          it 'is correct' do
+            expect(@model.num_available(@res.start_date + start_offset,
+                                        @res.due_date + due_offset)).to eq(0)
+          end
         end
-        it 'should return 0 if no items of that model are available' do
-          @reservation =
-            FactoryGirl.create(:valid_reservation, equipment_model: @model)
-          expect(@model.num_available(@reservation.start_date,
-                                      @reservation.due_date)).to eq(0)
+        shared_examples 'with an active reservation' do |type|
+          before do
+            @res = FactoryGirl.create(type, equipment_model: @model)
+            @model.reload
+          end
+          it 'is correct with no overlap' do
+            expect(@model.num_available(@res.due_date + 1.day,
+                                        @res.due_date + 2.day)).to eq(1)
+          end
+          it_behaves_like 'with overlap', 0.days, 0.days
+          it_behaves_like 'with overlap', 1.day, 1.day
+          it_behaves_like 'with overlap', -1.day, 1.day
+        end
+
+        ACTIVE.each { |s| it_behaves_like 'with an active reservation', s }
+
+        describe 'with a checked_out overdue reservation' do
+          before do
+            @res = FactoryGirl.build(:overdue_reservation,
+                                     equipment_model: @model)
+            @res.save(validate: false)
+            @model.reload
+          end
+          it 'is correct with no overlap' do
+            expect(@model.num_available(@res.due_date + 1.day,
+                                        @res.due_date + 2.day)).to eq(0)
+          end
+          it_behaves_like 'with overlap', 0.days, 0.days
+          it_behaves_like 'with overlap', 1.day, 1.day
+          it_behaves_like 'with overlap', -1.day, 1.day
+        end
+
+        shared_examples 'with an inactive reservation' do |type|
+          # TODO
         end
       end
       describe '.number_overdue' do

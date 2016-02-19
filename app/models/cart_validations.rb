@@ -105,34 +105,25 @@ module CartValidations
     errors
   end
 
-  def check_max_items(count_hash, relevant, count_method)
-    # generic method for making sure the count_hash doesn't
-    # contain more than the item max when taking into account
-    # the relevant reservations
-
-    errors = []
-    count_hash.each do |item, q|
-      max = item.maximum_per_user
-
-      start_date.upto(due_date) do |d|
-        unless Reservation.send(count_method, d, item.id, relevant) + q > max
-          next
-        end
-        errors << "Only #{max} #{item.name.pluralize(max)} "\
-          'can be reserved at a time.'
-      end
-    end
-    errors
-  end
-
   def check_max_ems
     # check to make sure that the cart's EMs + the current resever's
     # EMs doesn't exceed any limits
 
-    count_hash = get_items
-    relevant = Reservation.for_reserver(reserver_id).active
-               .includes(:equipment_model).all
-    check_max_items(count_hash, relevant, :number_for_model_on_date)
+    errors = []
+
+    get_items.each do |model|
+      overdue = Reservation.overdue.for_reserver(reserver_id)
+                .for_eq_model(model).count
+      source = Reservation.for_reserver(reserver_id).active
+               .for_eq_model(model)
+
+      if model.num_reserved(start_date, due_date, source) + overdue >
+        model.max_per_user
+        errors << "Only #{model.max_per_user} #{model.name.pluralize} "\
+          'can be reserved at a time.'
+      end
+    end
+    errors
   end
 
   def check_max_cat
@@ -145,9 +136,22 @@ module CartValidations
       cat_hash[ems[index].category] ||= 0
       cat_hash[ems[index].category] += q
     end
-    relevant = Reservation.for_reserver(reserver_id).active
+    source = Reservation.for_reserver(reserver_id).active
                .with_categories.all
-    check_max_items(cat_hash, relevant, :number_for_category_on_date)
+    errors = []
+# TODO
+    cat_hash.each do |item, q|
+      max = item.maximum_per_user
+
+      start_date.upto(due_date) do |d|
+        unless Reservation.number_for(value, item.id, symbol, source) + q > max
+          next
+        end
+        errors << "Only #{max} #{item.name.pluralize} "\
+          'can be reserved at a time.'
+      end
+    end
+    errors
   end
 
   def check_availability(model = EquipmentModel.find(items.keys.first),

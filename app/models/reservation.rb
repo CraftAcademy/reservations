@@ -110,11 +110,18 @@ class Reservation < ActiveRecord::Base
     item_ids == item_ids.uniq
   end
 
-  def self.number_for_model_on_date(date, model_id, source)
+  def self.number_for_model_on_date(date, id, source)
     # count the number of reservations that overlaps a date within
     # a given array of source reservations and that matches
     # a specific model id
-    number_for(date, model_id, source, :equipment_model_id)
+    count = 0
+    source.each do |r|
+      if r.start_date <= date && r.due_date >= date &&
+         r.send(:equipment_model_id) == id && !r.overdue
+        count += 1
+      end
+    end
+    count
   end
 
   def self.number_for_category_on_date(date, category_id, reservations)
