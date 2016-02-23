@@ -7,6 +7,7 @@
 *This release includes an upgrade to Ruby 2.2.3 and Rails 4.2.5 along with updates to many other dependencies. Also, the configuration parameter SERVE_STATIC was renamed to RAILS_SERVE_STATIC_FILES.*
 
 ### Fixed
+* Fixed redirect error on direuct url visit ot /reservations/new ([#1502](https://github.com/YaleSTC/reservations/issues/1502)).
 * Fixed the alignment of the reset TOS checkbox on the Settings page ([#1266](https://github.com/YaleSTC/reservations/issues/1266)).
 * Fixed issue where most users couldn't hide announcements ([#1339](https://github.com/YaleSTC/reservations/issues/1339)).
 * The equipment model availability numbers no longer overflow when they are two digits long ([#1363](https://github.com/YaleSTC/reservations/issues/1363)).
