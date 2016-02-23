@@ -399,6 +399,10 @@ class Reservation < ActiveRecord::Base
             name = 'Checked Out Time'
             old_val = diff[0].to_s(:long)
             new_val = diff[1].to_s(:long)
+          when 'checked_in'
+            name = 'Checked In Time'
+            old_val = diff[0].to_s(:long)
+            new_val = diff[1].to_s(:long)
           end
           self.notes += "\n#{name} changed from " + old_val + ' to '\
             + new_val + '.'
