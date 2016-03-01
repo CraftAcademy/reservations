@@ -33,7 +33,7 @@
 * The reservation overdue parameter correctly updates when editing the due date of checked out reservations ([#1479](https://github.com/YaleSTC/reservations/issues/1479)).
 * Fixed an issue where enabling CAS wouldn't actually require the relevant gem ([#1487](https://github.com/YaleSTC/reservations/issues/1487)).
 * Reservations now correctly identifies blackout conflicts ([#1489](https://github.com/YaleSTC/reservations/issues/1489)).
-
+* Translation added for button label ([#1463](https://github.com/YaleSTC/reservations/issues/1463)).
 ### Changed
 * Refactored and redesigned the confirm reservation page to allow editing ([#237](https://github.com/YaleSTC/reservations/issues/237)).
 * Refactored and improved Reservation queries using Query Objects ([#1288](https://github.com/YaleSTC/reservations/issues/1288)).
