@@ -54,6 +54,8 @@ gem 'redcarpet', '~> 3.3.4'
 
 # iCalendar export
 gem 'icalendar', '~> 2.3.0'
+# for better counter caches
+gem 'counter_culture', '~> 0.1.33'
 
 group :development, :test do
   gem 'pry', '~> 0.10.3'

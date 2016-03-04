@@ -332,19 +332,6 @@ describe EquipmentModel, type: :model do
           # TODO
         end
       end
-      describe '.number_overdue' do
-        it 'should return the number of items of a given model that are '\
-          'checked out and overdue' do
-          @reservation =
-            FactoryGirl.build(:overdue_reservation, equipment_model: @model)
-          @reservation.save(validate: false)
-          @extra_item =
-            FactoryGirl.create(:equipment_item, equipment_model: @model)
-          @model.reload
-          expect(@model.equipment_items_count).to eq(2)
-          expect(@model.number_overdue).to eq(1)
-        end
-      end
       describe '.num_available_on' do
         it 'should take the total # of the model, subtract the number '\
           'reserved, checked-out, and overdue for the given date and return '\

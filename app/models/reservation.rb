@@ -4,6 +4,12 @@ class Reservation < ActiveRecord::Base
   include ReservationValidations
 
   belongs_to :equipment_model
+  counter_culture :equipment_model,
+    column_name: Proc.new { |r| 'overdue_count' if r.overdue },
+    column_names: { ['reservations.overdue = ?', true] => 'overdue_count' }
+  counter_culture [:equipment_model, :category],
+    column_name: Proc.new { |r| 'overdue_count' if r.overdue },
+    column_names: { ['reservations.overdue = ?', true] => 'overdue_count' }
   belongs_to :equipment_item
   belongs_to :reserver, class_name: 'User'
   belongs_to :checkout_handler, class_name: 'User'
@@ -128,7 +134,7 @@ class Reservation < ActiveRecord::Base
     number_for(date, category_id, reservations, :category_id)
   end
 
-  def self.number_for(date, value, source, property)
+  def self.number_for(source, date: Time.zone.today, **properties)
     count = 0
     source.each do |r|
       if r.start_date <= date && r.due_date >= date &&

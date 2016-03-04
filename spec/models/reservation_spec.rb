@@ -21,6 +21,38 @@ describe Reservation, type: :model do
   # can't run if nil (?)
   #
 
+  describe '.number_for' do
+    before(:all) do
+      @ems = FactoryGirl.create_pair(:equipment_model)
+    end
+    before(:each) do
+      @source = FactoryGirl.build_pair(:valid_reservation,
+                                       equipment_model: @ems.first)
+      @source.last.start_date = Time.zone.today + 2
+      @source.last.due_date = Time.zone.today + 3
+    end
+    it 'counts the number that overlap with today' do
+      expect(Reservation.number_for(@source)).to eq 1
+    end
+    it 'counts the number that overlap with a given day' do
+      expect(Reservation.number_for(@source, Time.zone.today + 2.days)).to eq 1
+    end
+    shared_examples 'with given properties' do |properties|
+      before do
+        @source.first.attributes = properties
+      end
+      it 'returns the correct count' do
+        # this might not be the best approach because its not a guarantee that
+        # the other reservation doesn't have these properties
+        expect(Reservation.number_for(@source, properties)).to eq 1
+      end
+    end
+    it_behaves_like 'with given properties', equipment_model_id: @ems.last.id,
+      equipment_model: @ems.last
+    it_behaves_like 'with given properties',
+      FactoryGirl.attributes_for(:overdue_reservation)
+  end
+
   describe '.find renewal length' do
     subject(:reservation) do
       r = FactoryGirl.create(:valid_reservation)

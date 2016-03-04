@@ -188,7 +188,7 @@ class EquipmentModel < ActiveRecord::Base
       source = Reservation.for_eq_model(id).active
                .overlaps_with_date_range(start_date, due_date)
     end
-    equipment_items.active.count - number_overdue -
+    equipment_items.active.count - overdue_count -
       num_reserved(start_date, due_date, source)
   end
 
@@ -196,7 +196,7 @@ class EquipmentModel < ActiveRecord::Base
     # get the total number of items of this kind then subtract the total
     # quantity currently reserved, checked-out, and overdue
     reserved = Reservation.reserved_on_date(date).for_eq_model(id).count
-    equipment_items.active.count - reserved - number_overdue
+    equipment_items.active.count - reserved - overdue_count
   end
 
   # figure out the qualitative status of this model's items
@@ -207,12 +207,6 @@ class EquipmentModel < ActiveRecord::Base
     elsif num == total then 'all'
     else 'some'
     end
-  end
-
-  # Returns the number of overdue objects for a given model,
-  # as long as they have been checked out.
-  def number_overdue
-    Reservation.overdue.for_eq_model(id).size
   end
 
   # Returns true if the reserver is ineligible to checkout the model.

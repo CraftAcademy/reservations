@@ -14,6 +14,7 @@ task run_daily_tasks: :environment do
   Rake::Task['email_checkout_reminder'].invoke
   Rake::Task['delete_old_blackouts'].invoke
   Rake::Task['delete_missed_reservations'].invoke
+  Reservation.counter_culture_fix_counts
   puts 'Done!'
 end
 
