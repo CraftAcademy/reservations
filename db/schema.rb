@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150719052612) do
+ActiveRecord::Schema.define(version: 20160304025530) do
 
   create_table "announcements", force: :cascade do |t|
     t.text     "message",    limit: 65535
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20150719052612) do
     t.integer  "max_renewal_length",      limit: 4
     t.integer  "renewal_days_before_due", limit: 4
     t.boolean  "csv_import",                          default: false, null: false
+    t.integer  "overdue_count",           limit: 4,   default: 0,     null: false
   end
 
   create_table "checkin_procedures", force: :cascade do |t|
@@ -138,6 +139,7 @@ ActiveRecord::Schema.define(version: 20150719052612) do
     t.integer  "max_checkout_length",        limit: 4
     t.integer  "equipment_items_count",      limit: 4,                              default: 0,     null: false
     t.decimal  "late_fee_max",                             precision: 10, scale: 2, default: 0.0
+    t.integer  "overdue_count",              limit: 4,                              default: 0,     null: false
   end
 
   create_table "equipment_models_associated_equipment_models", id: false, force: :cascade do |t|
