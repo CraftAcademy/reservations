@@ -560,7 +560,7 @@ describe ReservationsController, type: :controller do
     end
 
     ## Happy paths due to authorization
-    shared_examples 'can access update page' do
+      shared_examples 'can access update page' do
       # Happy paths
       describe 'and provides valid params[:reservation]' do
         before(:each) do
@@ -571,11 +571,16 @@ describe ReservationsController, type: :controller do
                                            start_date: Time.zone.today,
                                            due_date: Time.zone.today + 4.days),
               equipment_item: ''
+              @rounded = Time.at((Time.zone.now.to_time.to_i / 900.0).round * 900)
+              @reservation.update_attributes(checked_out: @rounded,
+                                             checked_in: @rounded + 5.day)
         end
         it 'should update the reservation details' do
           @reservation.reload
           expect(@reservation.start_date).to eq(Time.zone.today)
           expect(@reservation.due_date).to eq(Time.zone.today + 4.days)
+          expect(@reservation.checked_out).to eq(@rounded)
+          expect(@reservation.checked_in).to eq(@rounded + 5.days)
         end
         it 'updates the reservations notes' do
           expect { @reservation.reload }.to change(@reservation, :notes)
