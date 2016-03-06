@@ -7,7 +7,6 @@
 *This release includes an upgrade to Ruby 2.2.3 and Rails 4.2.5 along with updates to many other dependencies. Also, the configuration parameter SERVE_STATIC was renamed to RAILS_SERVE_STATIC_FILES.*
 
 ### Fixed
-* Fixed redirect error on direuct url visit ot /reservations/new ([#1502](https://github.com/YaleSTC/reservations/issues/1502)).
 * Fixed the alignment of the reset TOS checkbox on the Settings page ([#1266](https://github.com/YaleSTC/reservations/issues/1266)).
 * Fixed issue where most users couldn't hide announcements ([#1339](https://github.com/YaleSTC/reservations/issues/1339)).
 * The equipment model availability numbers no longer overflow when they are two digits long ([#1363](https://github.com/YaleSTC/reservations/issues/1363)).
@@ -44,8 +43,10 @@
 * Updated SERVE_STATIC to RAILS_SERVE_STATIC_FILES in .env.example and app.json ([#1419](https://github.com/YaleSTC/reservations/issues/1419)).
 * Changed receipts page to include user search ([#1420](https://github.com/YaleSTC/reservations/issues/1420)).
 * Reservations now defaults to deleting missed reservations after one week ([#1491](https://github.com/YaleSTC/reservations/issues/1491)).
+* Fixed redirect error on direct url visit to /reservations/new ([#1502](https://github.com/YaleSTC/reservations/issues/1502)).
 
 ### Added
+* Uploads can now be hosted on Amazon S3; particularly useful for Heroku deployments ([#1210](https://github.com/YaleSTC/reservations/issues/1210)).
 * CSV files of user and equipment data can be downloaded ([#1337](https://github.com/YaleSTC/reservations/issues/1337)).
 * Made archived reservations accessible through the reservations index page ([#1383](https://github.com/YaleSTC/reservations/issues/1383)).
 
