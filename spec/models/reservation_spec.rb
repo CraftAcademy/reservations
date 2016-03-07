@@ -50,6 +50,15 @@ describe Reservation, type: :model do
       expect(Reservation.number_for(@source, equipment_model_id: @ems.last.id)
             ).to eq 1
     end
+    it 'can count not overdue reservations on a model' do
+      @source.last.attributes = FactoryGirl.attributes_for(
+        :overdue_reservation)
+      @source.first.attributes = { equipment_model: @ems.last, 
+                                   start_date: @source.last.start_date }
+      expect(Reservation.number_for(@source, date: @source.last.start_date + 1,
+                                    overdue: false,
+                                    equipment_model_id: @ems.last.id)).to eq 1
+    end
   end
 
   describe '.find renewal length' do
