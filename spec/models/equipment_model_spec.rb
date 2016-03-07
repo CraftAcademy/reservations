@@ -298,7 +298,8 @@ describe EquipmentModel, type: :model do
         end
         shared_examples 'with an active reservation' do |type|
           before do
-            @res = FactoryGirl.create(type, equipment_model: @model)
+            @res = FactoryGirl.build(type, equipment_model: @model)
+            @res.save(validate: false)
             @model.reload
           end
           it 'is correct with no overlap' do
@@ -312,7 +313,7 @@ describe EquipmentModel, type: :model do
 
         ACTIVE.each { |s| it_behaves_like 'with an active reservation', s }
 
-        describe 'with a checked_out overdue reservation' do
+        context 'with a checked-out, overdue reservation' do
           before do
             @res = FactoryGirl.build(:overdue_reservation,
                                      equipment_model: @model)
@@ -329,8 +330,22 @@ describe EquipmentModel, type: :model do
         end
 
         shared_examples 'with an inactive reservation' do |type|
-          # TODO
+          before do
+            @res = FactoryGirl.build(type, equipment_model: @model)
+            @res.save(validate: false)
+            @model.reload
+          end
+          it 'is correct with no overlap' do
+            expect(@model.num_available(@res.due_date + 1.day,
+                                        @res.due_date + 2.day)).to eq(1)
+          end
+          it 'is correct with overlap' do
+            expect(@model.num_available(@res.start_date,
+                                        @res.due_date)).to eq(1)
+          end
         end
+
+        INACTIVE.each { |s| it_behaves_like 'with an inactive reservation', s }
       end
       describe '.num_available_on' do
         it 'should take the total # of the model, subtract the number '\

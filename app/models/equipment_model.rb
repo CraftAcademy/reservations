@@ -164,17 +164,16 @@ class EquipmentModel < ActiveRecord::Base
     end
   end
 
-  def num_reserved(start_date, due_date, source_reservations)
-    # get the number reserved in the source reservations
-    # uses 0 queries, you need to specify the max number of
-    # items yourself
-    max_reserved = 0
+  def num_busy(start_date, due_date, source)
+    # get the number busy (not able to be reserved) in the source reservations
+    # uses 0 queries
+    max = 0
     start_date.upto(due_date) do |d|
-      reserved = Reservation.number_for_model_on_date(d, id,
-                                                      source_reservations)
-      max_reserved = reserved if reserved > max_reserved
+      busy = Reservation.number_for(source, date: d, equipment_model_id: id,
+                                    overdue: false)
+      max = busy if busy > max
     end
-    max_reserved
+    max + overdue_count
   end
 
   def num_available(start_date, due_date, source = nil)
@@ -188,8 +187,7 @@ class EquipmentModel < ActiveRecord::Base
       source = Reservation.for_eq_model(id).active
                .overlaps_with_date_range(start_date, due_date)
     end
-    equipment_items.active.count - overdue_count -
-      num_reserved(start_date, due_date, source)
+    equipment_items.active.count - num_busy(start_date, due_date, source)
   end
 
   def num_available_on(date)
