@@ -116,45 +116,12 @@ class Reservation < ActiveRecord::Base
     item_ids == item_ids.uniq
   end
 
-  def self.number_for_model_on_date(date, id, source)
-    # count the number of reservations that overlaps a date within
-    # a given array of source reservations and that matches
-    # a specific model id
-    count = 0
-    source.each do |r|
-      if r.start_date <= date && r.due_date >= date &&
-         r.send(:equipment_model_id) == id && !r.overdue
-        count += 1
-      end
-    end
-    count
-  end
-
-  def self.number_for_category_on_date(date, category_id, reservations)
-    number_for(date, category_id, reservations, :category_id)
-  end
-
   def self.number_for(source, date: Time.zone.today, **properties)
     count = 0
     source.each do |r|
-      if r.start_date <= date && r.due_date >= date &&
-         r.send(property) == value
-        count += 1
-      end
-    end
-    count
-  end
-
-  def self.number_overdue_for_eq_model(model_id, reservations)
-    # count the number of overdue reservations for a given
-    # eq model out of an array of source reservations
-    #
-    # used in rendering the catalog in order to save db queries
-    #
-    # 0 queries
-    count = 0
-    reservations.each do |r|
-      count += 1 if r.overdue && r.equipment_model_id == model_id
+      next unless r.start_date <= date && r.due_date >= date
+      next unless r.has_properties? properties
+      count += 1
     end
     count
   end
@@ -491,5 +458,9 @@ class Reservation < ActiveRecord::Base
     return true unless checked_out?
     self.overdue = due_date < Time.zone.today
     true # so we don't halt the transaction if it's not overdue
+  end
+  def has_properties?(properties)
+    properties.each { |k, v| return false unless send(k) == v }
+    true
   end
 end
