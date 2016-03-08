@@ -290,6 +290,7 @@ describe EquipmentModel, type: :model do
       INACTIVE = [:checked_in_reservation, :overdue_returned_reservation,
                  :missed_reservation, :request]
       describe '.num_available' do
+        ### TODO: rename all of these 
         shared_examples 'with overlap' do |start_offset, due_offset| 
           it 'is correct' do
             expect(@model.num_available(@res.start_date + start_offset,
@@ -300,6 +301,7 @@ describe EquipmentModel, type: :model do
           before do
             @res = FactoryGirl.build(type, equipment_model: @model)
             @res.save(validate: false)
+            Reservation.counter_culture_fix_counts
             @model.reload
           end
           it 'is correct with no overlap' do
@@ -318,6 +320,7 @@ describe EquipmentModel, type: :model do
             @res = FactoryGirl.build(:overdue_reservation,
                                      equipment_model: @model)
             @res.save(validate: false)
+            Reservation.counter_culture_fix_counts
             @model.reload
           end
           it 'is correct with no overlap' do
@@ -333,6 +336,7 @@ describe EquipmentModel, type: :model do
           before do
             @res = FactoryGirl.build(type, equipment_model: @model)
             @res.save(validate: false)
+            Reservation.counter_culture_fix_counts
             @model.reload
           end
           it 'is correct with no overlap' do
