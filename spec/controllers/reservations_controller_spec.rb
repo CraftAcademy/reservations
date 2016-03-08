@@ -571,19 +571,16 @@ describe ReservationsController, type: :controller do
                                            start_date: Time.zone.today,
                                            due_date: Time.zone.today + 4.days),
               equipment_item: ''
-          # rubocop:disable all
-          time_int = Time.zone.now.to_time.to_i
-          # rubocop:enable all
-          @rounded = Time.zone.at((time_int / 900.0).round * 900)
-          @reservation.update_attributes(checked_out: @rounded,
-                                         checked_in: @rounded + 5.days)
+          @now = Time.zone.now
+          @reservation.update_attributes(checked_out: @now,
+                                         checked_in: @now + 5.days)
         end
         it 'should update the reservation details' do
           @reservation.reload
           expect(@reservation.start_date).to eq(Time.zone.today)
           expect(@reservation.due_date).to eq(Time.zone.today + 4.days)
-          expect(@reservation.checked_out).to eq(@rounded)
-          expect(@reservation.checked_in).to eq(@rounded + 5.days)
+          expect(@reservation.checked_out).to eq(@now)
+          expect(@reservation.checked_in).to eq(@now + 5.days)
         end
         it 'updates the reservations notes' do
           expect { @reservation.reload }.to change(@reservation, :notes)

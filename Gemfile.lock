@@ -448,7 +448,7 @@ DEPENDENCIES
   highline (~> 1.7.8)
   inline_svg (~> 0.6.1)
   jquery-rails (~> 4.0.5)
-  jquery-timepicker-addon-rails
+  jquery-timepicker-addon-rails (~> 1.0)
   jquery-ui-rails (~> 5.0.5)
   kaminari (~> 0.16.3)
   letter_opener (~> 1.4.1)
