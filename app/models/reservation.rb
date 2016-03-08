@@ -396,11 +396,11 @@ class Reservation < ActiveRecord::Base
             old_val = diff[0] ? EquipmentItem.find(diff[0]).md_link : 'nil'
             new_val = diff[1] ? EquipmentItem.find(diff[1]).md_link : 'nil'
           when 'checked_out'
-            name = 'Checked Out Time'
+            name = 'Checkout Time'
             old_val = diff[0].to_s(:long)
             new_val = diff[1].to_s(:long)
           when 'checked_in'
-            name = 'Checked In Time'
+            name = 'Checkin Time'
             old_val = diff[0].to_s(:long)
             new_val = diff[1].to_s(:long)
           end

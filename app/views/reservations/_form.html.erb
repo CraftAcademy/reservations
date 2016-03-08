@@ -26,7 +26,7 @@
 
   <% if @reservation.checked_out %>
   <div class="form-group">
-    <%= f.label :checked_out, 'Check-out date and time', class: 'col-sm-2 control-label' %>
+    <%= f.label :checked_out, 'Checked out', class: 'col-sm-2 control-label' %>
     <div class="col-sm-7">
       <%= f.text_field :checked_out, class: 'date_checkout form-control', value: @reservation.checked_out.strftime('%m/%d/%Y %l:%M %p') %>
       <%= f.input :checked_out, as: :hidden, input_html: { id: "date_checkout_alt" } %>
@@ -36,7 +36,7 @@
 
   <% if @reservation.checked_in %>
   <div class="form-group">
-    <%= f.label :checked_in, 'Check-in date and time', class: 'col-sm-2 control-label' %>
+    <%= f.label :checked_in, 'Checked in', class: 'col-sm-2 control-label' %>
     <div class="col-sm-7">
       <%= f.text_field :checked_in, class: 'date_checkin form-control', value: @reservation.checked_in.strftime('%m/%d/%Y %l:%M %p') %>
       <%= f.input :checked_in, as: :hidden, input_html: { id: "date_checkin_alt" } %>

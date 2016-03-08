@@ -57,7 +57,7 @@ function load_datepicker() {
     altField: '#date_checkout_alt',
     minDate: 0,
     onClose: function(dateText, inst) {
-      var chaeckin_date = $('.date_checkin').datepicker("getDate");
+      var checkin_date = $('.date_checkin').datepicker("getDate");
       var checkout_date = $('.date_checkout').datepicker("getDate");
       if (checkout_date > chaeckin_date){
         var new_date = new Date(checkout_date.getTime()+86400000);
