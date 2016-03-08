@@ -5,10 +5,10 @@ class Reservation < ActiveRecord::Base
 
   belongs_to :equipment_model
   counter_culture :equipment_model,
-    column_name: Proc.new { |r| 'overdue_count' if r.overdue },
+    column_name: Proc.new { |r| 'overdue_count' if r.overdue && r.active? },
     column_names: { ['reservations.overdue = ?', true] => 'overdue_count' }
   counter_culture [:equipment_model, :category],
-    column_name: Proc.new { |r| 'overdue_count' if r.overdue },
+    column_name: Proc.new { |r| 'overdue_count' if r.overdue && r.active? },
     column_names: { ['reservations.overdue = ?', true] => 'overdue_count' }
   belongs_to :equipment_item
   belongs_to :reserver, class_name: 'User'
@@ -127,6 +127,10 @@ class Reservation < ActiveRecord::Base
   end
 
   ## Getter style instance methods ##
+
+  def active?
+    %w(reserved checked_out).include? status
+  end
 
   def approved?
     flagged?(:request) && !%w(denied requested).include?(status)
