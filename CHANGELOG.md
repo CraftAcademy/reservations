@@ -34,6 +34,7 @@
 * Reservations now correctly identifies blackout conflicts ([#1489](https://github.com/YaleSTC/reservations/issues/1489)).
 * Translation added for button label ([#1463](https://github.com/YaleSTC/reservations/issues/1463)).
 ### Changed
+* Clarified error message when adding too many items to cart ([#1242])(https://github.com/YaleSTC/reservations/issues/1242)).
 * Refactored and redesigned the confirm reservation page to allow editing ([#237](https://github.com/YaleSTC/reservations/issues/237)).
 * Refactored and improved Reservation queries using Query Objects ([#1288](https://github.com/YaleSTC/reservations/issues/1288)).
 * Updated all dependencies, including Ruby and Rails ([#1329](https://github.com/YaleSTC/reservations/issues/1329)).
