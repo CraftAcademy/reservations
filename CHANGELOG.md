@@ -50,6 +50,9 @@
 * CSV files of user and equipment data can be downloaded ([#1337](https://github.com/YaleSTC/reservations/issues/1337)).
 * Made archived reservations accessible through the reservations index page ([#1383](https://github.com/YaleSTC/reservations/issues/1383)).
 
+### Changed
+* Updated the database schema to reflect the default field limits in MariaDB based on change in Rails 4.2 ([#1517](https://github.com/YaleSTC/reservations/issues/1517)).
+
 
 ## v5.5.1 - 2016-01-12
 ### Fixed
