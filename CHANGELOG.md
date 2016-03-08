@@ -48,6 +48,7 @@
 ### Added
 * Uploads can now be hosted on Amazon S3; particularly useful for Heroku deployments ([#1210](https://github.com/YaleSTC/reservations/issues/1210)).
 * CSV files of user and equipment data can be downloaded ([#1337](https://github.com/YaleSTC/reservations/issues/1337)).
+* You can now view a monthly calendar view of reservations for categories, equipment models, and equipment items. ([#1360](https://github.com/YaleSTC/reservations/issues/1360)).
 * Made archived reservations accessible through the reservations index page ([#1383](https://github.com/YaleSTC/reservations/issues/1383)).
 
 ### Changed
