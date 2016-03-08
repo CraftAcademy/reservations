@@ -29,8 +29,8 @@ module ReservationValidations
 
   # Checks that reservation check in and check out times are after start dates
   def check_in_out_time_after_start_date
-    return unless checked_out && checked_in && start_date &&
-    ((checked_out < start_date) || (checked_in < start_date))
+    return unless (checked_out && start_date && checked_out < start_date) ||
+                  (checked_in && start_date && checked_in < start_date)
     errors.add(:base, "Reservation check out time and check in time must be after start date.\n")
   end
 
