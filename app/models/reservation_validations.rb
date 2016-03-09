@@ -28,16 +28,23 @@ module ReservationValidations
   end
 
   # Checks that reservation check in and check out times are after start dates
-  def check_in_out_time_after_start_date
-    return unless (checked_out && start_date && checked_out < start_date) ||
-                  (checked_in && start_date && checked_in < start_date)
-    errors.add(:base, "Reservation check out time and check in time must be after start date.\n")
+  def check_in_time_after_start_date
+    return unless checked_in && start_date && (checked_in < start_date)
+    errors.add(:base,
+               "Reservation check in time must be after start date.\n")
+  end
+
+  def check_out_time_after_start_date
+    return unless checked_out && start_date && (checked_out < start_date)
+    errors.add(:base,
+               "Reservation check out time must be after start date.\n")
   end
 
   # Checks that reservation check in time is after check out time
   def check_in_time_after_check_out_time
     return unless checked_out && checked_in && (checked_in < checked_out)
-    errors.add(:base, "Reservation check in time must be after check out time.\n")
+    errors.add(:base,
+               "Reservation check in time must be after check out time.\n")
   end
 
   # Checks that the equipment_item is of type equipment_model
