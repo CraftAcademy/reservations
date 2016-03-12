@@ -14,7 +14,8 @@ class Reservation < ActiveRecord::Base
     record.errors.add(attr, 'cannot be a guest') if value.role == 'guest'
   end
   validate :start_date_before_due_date
-  validate :check_in_out_time_after_start_date
+  validate :check_out_time_after_start_date
+  validate :check_in_time_after_start_date
   validate :check_in_time_after_check_out_time
   validate :matched_item_and_model
   validate :check_status

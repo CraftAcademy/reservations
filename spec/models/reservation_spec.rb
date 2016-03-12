@@ -585,11 +585,11 @@ describe Reservation, type: :model do
     end
     it 'should fail to edit with check in time before start date' do
       @res.update_attributes(checked_in: Time.zone.now - 2.days)
-      expect(@res.check_in_out_time_after_start_date).not_to be_nil
+      expect(@res.check_in_time_after_start_date).not_to be_nil
     end
     it 'should fail to edit with check out time before start date' do
       @res.update_attributes(checked_out: Time.zone.now - 2.days)
-      expect(@res.check_in_out_time_after_start_date).not_to be_nil
+      expect(@res.check_out_time_after_start_date).not_to be_nil
     end
     it 'should fail to edit with check in time before check out time' do
       @res.update_attributes(checked_in: Time.zone.now,
