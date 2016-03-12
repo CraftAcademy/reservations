@@ -571,7 +571,7 @@ describe ReservationsController, type: :controller do
                                            start_date: Time.zone.today,
                                            due_date: Time.zone.today + 4.days),
               equipment_item: ''
-          @now = Time.zone.now
+          @now = Time.zone.now.round
           @reservation.update_attributes(checked_out: @now,
                                          checked_in: @now + 5.days)
         end
