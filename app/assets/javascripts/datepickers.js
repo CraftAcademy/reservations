@@ -55,7 +55,6 @@ function load_datepicker() {
     altFormat: "yy-mm-dd",
     altTimeFormat: "HH:mm",
     altField: '#date_checkout_alt',
-    minDate: 0,
     onClose: function(dateText, inst) {
       var checkin_date = $('.date_checkin').datepicker("getDate");
       var checkout_date = $('.date_checkout').datepicker("getDate");
@@ -72,7 +71,6 @@ function load_datepicker() {
     altFieldTimeOnly: false,
     altFormat: "yy-mm-dd",
     altTimeFormat: "HH:mm",
-    altField: '#date_checkin_alt',
-    minDate: 0,
+    altField: '#date_checkin_alt'
   });
 };
