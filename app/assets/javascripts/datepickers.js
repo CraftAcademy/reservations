@@ -56,12 +56,7 @@ function load_datepicker() {
     altTimeFormat: "HH:mm",
     altField: '#date_checkout_alt',
     onClose: function(dateText, inst) {
-      var checkin_date = $('.date_checkin').datepicker("getDate");
-      var checkout_date = $('.date_checkout').datepicker("getDate");
-      if (checkout_date > chaeckin_date){
-        var new_date = new Date(checkout_date.getTime()+86400000);
-        $('.date_checkin').datetimepicker("setDate", new_date);
-      }
+      validateTimePcikers('.date_start', '.date_checkout', '#reservation_checked_out','.date_checkin');
     }
   });
 
@@ -72,5 +67,24 @@ function load_datepicker() {
     altFormat: "yy-mm-dd",
     altTimeFormat: "HH:mm",
     altField: '#date_checkin_alt'
+    /*onClose: function(dateText, inst) {
+      validateTimePcikers('.date_start', '.date_checkout', '#reservation_checked_in','.date_checkin');
+    }*/
   });
 };
+
+
+function validateTimePcikers (startDateName, checkOutDateName, formFieldName, checkInDateName)
+{
+  if (typeof checkInDateName !== 'undefined')
+  {
+    var startDate = $(startDateName).datepicker("getDate");
+    var checkOutDate = $(checkOutDateName).datepicker("getDate");
+    var checkInDate = $(checkInDateName).datepicker("getDate");
+    var originalDate = $(formFieldName).attr('value');
+    if ((checkOutDate < startDate) || (checkInDate < checkOutDate))
+    {
+      $(checkOutDateName).datetimepicker("setDate", originalDate);
+    }
+  }
+}
