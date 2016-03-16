@@ -615,7 +615,7 @@ describe Reservation, type: :model do
       r = FactoryGirl.build(:valid_reservation,
                             start_date: Time.zone.today,
                             due_date: Time.zone.today + 1.day)
-      r.assign_attributes(checked_in: Time.zone.now + 1.days)
+      r.assign_attributes(checked_in: Time.zone.now + 1.day)
       r.assign_attributes(checked_out: Time.zone.now + 2.days)
       expect(r.save).to be_falsey
     end
